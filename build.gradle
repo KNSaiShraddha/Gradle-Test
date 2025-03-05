@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.akhikhl.gretty:gretty:+'
+        classpath 'org.akhikhl.gretty:gretty:+'  // Gradle plugin for Gretty
     }
 }
 
@@ -30,7 +30,8 @@ dependencies {
 
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
 
-    testimplementation group: 'org.testng', name: 'testng', version: '6.9.13.6'
+    // Updated test dependency syntax
+    testImplementation group: 'org.testng', name: 'testng', version: '6.9.13.6'
 }
 
 gretty {
@@ -40,7 +41,7 @@ gretty {
 }
 
 war {
-    archiveName 'gradle-war.war'
+    archiveName = 'gradle-war.war'  // Corrected archiveName to use '=' sign
 }
 
 test {
