@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    environment {
+        TOMCAT_HOME = 'C:\\Tomcat\\apache-tomcat-9.0.100'
+        TOMCAT_PORT = '8081'
+        TOMCAT_USER = 'admin'
+        TOMCAT_PASS = 'admin123'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your Git repository
+                git 'https://github.com/KNSaiShraddha/Gradle-Test.git'
+            }
+        }
+        stage('Build with Gradle') {
+            steps {
+                script {
+                    // Build the project using Gradle and generate the WAR file
+                    sh './gradlew clean build'  // Use Gradle wrapper to clean and build the project
+                }
+            }
+        }
+        stage('Deploy to Tomcat') {
+            steps {
+                script {
+                    // Deploy the WAR file to Tomcat
+                    sh """
+                    curl -u ${TOMCAT_USER}:${TOMCAT_PASS} \
+                    -T build/libs/gradle-war.war \
+                    "http://localhost:${TOMCAT_PORT}/manager/text/deploy?path=/gradle-war&update=true"
+                    """
+                }
+            }
+        }
+    }
+}
