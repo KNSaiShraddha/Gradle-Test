@@ -30,14 +30,12 @@ dependencies {
 
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
 
-    testCompile group: 'org.testng', name: 'testng', version: '6.9.13.6'
+    testimplementation group: 'org.testng', name: 'testng', version: '6.9.13.6'
 }
 
 gretty {
-    // supported values:
-    // 'jetty7', 'jetty8', 'jetty9', 'jetty93', 'jetty94', 'tomcat7', 'tomcat8'
-    servletContainer = 'jetty9'
-    httpPort = 8080
+    servletContainer = 'tomcat9'  // Set servlet container to Tomcat9
+    httpPort = 8081               // Use port 8081 for Tomcat
     contextPath = '/gradle-war'
 }
 
